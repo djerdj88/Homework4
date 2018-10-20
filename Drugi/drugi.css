@@ -1,0 +1,40 @@
+.wrapper {
+    margin: 0 auto;
+    width: 330px;
+}
+
+h1 {
+    text-align: center;
+    color: blue;
+}
+
+body {
+    background-image: url("http://i0.wp.com/slcrichmond.ca/wp-content/uploads/2014/10/chalkboard-art-free-printable-free-black-chalkboard-background-139919-1920x1200.jpg");
+    background-size: cover;
+}
+
+#cell-1, #cell-2, #cell-3, #cell-4, #cell-5, #cell-6
+, #cell-7, #cell-8, #cell-9 {
+    border: solid;
+    border-color: antiquewhite;
+    width: 10vw;
+    height: 10vw;
+    float: left;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    color: aquamarine;
+    font-size: 550%;
+}
+
+.row1, .row2, .row3 {
+    clear: both;
+    
+}
+
+.winner {
+    font-size: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: darkturquoise;
+}
