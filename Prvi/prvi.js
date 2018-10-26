@@ -1,5 +1,6 @@
 // 1. Dodavanje itema
-var a;
+var a, j = 0;
+let arr = "";
 // Prvo nam treba forma u kojoj unosimo ime itema
 // id - addForm
 const form = document.getElementById("addForm");
@@ -56,6 +57,12 @@ if (input !== ""){
     // novokreirani li u listu itema
     itemList.appendChild(li);
 }
+arr = [];
+  for (let i = 0; i < itemList.children.length; i++){
+    arr += itemList.children[i].innerText.slice(0, -2)+"*";
+  }
+  var lista = [];
+  setCookie("lista",arr, 108000000);
 document.getElementById("item").value = "";
 }
 
@@ -90,13 +97,15 @@ function removeItem(event){
      itemList.removeChild(li);
     }
   }
-
-      
-
+  arr = [];
+  for (let i = 0; i < itemList.children.length; i++){
+    arr += itemList.children[i].innerText.slice(0, -2)+"*";
+  }
+  var lista = [];
+  setCookie("lista",arr, 108000000);
           // onda obrisemo selektovani li
           // iz parent noda, tj. lista itema (definisana globalno)
           // parent.removeChild(child)
-
 }
 
 // 3. Filtriranje/pretraga elemenata
@@ -175,13 +184,29 @@ function getCookie(cname) {
 }
 
 function checkCookie() {
-  var user=getCookie("username");
-  if (user != "") {
-      alert("Welcome again " + user);
-  } else {
-     user = prompt("Please enter your name:","");
-     if (user != "" && user != null) {
-         setCookie("username", user, 30);
-     }
-  }
+  var listItem = getCookie("lista");
+  if (listItem !== ""){
+    listItem = listItem.split("*").toString();
+    listItem = listItem.split(",");
+    console.log(listItem.length);
+    
+  for (let i = 0; i < listItem.length - 1; i++){
+  
+      const li = document.createElement("li");
+      const op = document.createElement("option");
+      li.className = "list-group-item";
+      op.className = "opop"; // kreiramo datalist item
+      op.value = listItem[i];
+    
+      document.getElementById("datalist1").appendChild(op);
+      li.appendChild(document.createTextNode(listItem[i]));
+      console.log(li);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "btn btn-danger btn-sm float-right delete";
+        deleteBtn.appendChild(document.createTextNode("X"));
+        li.appendChild(deleteBtn);
+        document.getElementById("items").appendChild(li);
+    }
+    document.getElementById("item").value = "";
+}
 }
