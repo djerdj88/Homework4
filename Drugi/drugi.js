@@ -32,6 +32,7 @@ table.addEventListener("click", function(e){
         cell3.style.backgroundColor = "coral";
         document.querySelector(".winner").innerHTML = "<br><br><br>Player X is the Winner!";
         gameplay = false;
+        
     }
     else if (cell1.innerText === "X" && cell5.innerText === "X" && cell9.innerText === "X"){
         cell1.style.backgroundColor = "coral";
@@ -147,5 +148,10 @@ table.addEventListener("click", function(e){
         }
     }
 }
+}
+if (document.querySelector(".winner").innerHTML === "<br><br><br>Player O is the Winner!" || document.querySelector(".winner").innerHTML === "<br><br><br>Player X is the Winner!"){
+    setTimeout(() => {
+        location.reload();
+    }, 2000);
 }
 });
