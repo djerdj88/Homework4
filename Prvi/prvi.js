@@ -1,13 +1,16 @@
 // 1. Dodavanje itema
+function ID(selector){
+  return document.getElementById(selector);
+}
 var a, j = 0;
 let arr = "";
 // Prvo nam treba forma u kojoj unosimo ime itema
 // id - addForm
-const form = document.getElementById("addForm");
+const form = ID("addForm");
 
 // Treba nam container gdje se nalazi svi itemi
 // id - items
-const itemList = document.getElementById("items");
+const itemList = ID("items");
 
 // Na submit forme gdje unosimo item treba da aktiviramo submit event
 
@@ -20,13 +23,23 @@ function addItem(event){
 
 let input = document.getElementById("item").value;
 if (input !== ""){
+  let temp = 0;
     // Na submit forme trebamo da onemogucimo default ponasanje forme
   /// tj. da onemogucimo action na submit
-
   // Sada nam treba vrijednost iz input polja
   // koju smo unijeli
   // id - item
+    for (let i = 0; i < ID("items").children.length; i++){
+      if (ID("items").children[i].innerText.slice(0, -2) === input){
+        temp = 1;
+        break;
+      }
+    }
 
+    if (temp === 1){
+      alert("Ne mozete dodati dva puta isti item!!!");
+    }
+    else{
   // Sledeci korak je kreiranje novog li itema
   const li = document.createElement("li");
   const op = document.createElement("option"); // kreiramo option elemente za datalistu
@@ -56,6 +69,11 @@ if (input !== ""){
     // Nakon toga, potrebno je da dodamo
     // novokreirani li u listu itema
     itemList.appendChild(li);
+    }
+
+
+
+  
 }
 arr = [];
   for (let i = 0; i < itemList.children.length; i++){
@@ -183,12 +201,12 @@ function getCookie(cname) {
   return "";
 }
 
-function checkCookie() {
+function checkCookie(){
   var listItem = getCookie("lista");
   if (listItem !== ""){
     listItem = listItem.split("*").toString();
     listItem = listItem.split(",");
-    console.log(listItem.length);
+    
     
   for (let i = 0; i < listItem.length - 1; i++){
   
@@ -200,7 +218,6 @@ function checkCookie() {
     
       document.getElementById("datalist1").appendChild(op);
       li.appendChild(document.createTextNode(listItem[i]));
-      console.log(li);
         const deleteBtn = document.createElement("button");
         deleteBtn.className = "btn btn-danger btn-sm float-right delete";
         deleteBtn.appendChild(document.createTextNode("X"));
